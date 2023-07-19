@@ -10,8 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
     $users_id = $_SESSION['users_id'];
+    $created_at = date('Y-m-d H:i:s');
 
-    $result = mysqli_query($connection, "INSERT INTO posts (title, content, users_id) VALUES ('$title', '$content', '$users_id');");
+    $result = mysqli_query($connection, "INSERT INTO posts (title, content, users_id, created_at) VALUES ('$title', '$content', '$users_id', '$created_at');");
 
     header('Location: index.php');
     exit;
@@ -25,10 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>Create a Post</h2>
         <form action="" method="POST">
             <div class="mb-3">
-                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
             </div>
             <div class="mb-3">
-                <textarea class="form-control" name="content" placeholder="Input your content here."></textarea>
+                <textarea class="form-control" name="content" placeholder="Input your content here." required></textarea>
             </div>
 
             <div class="d-flex justify-content-end gap-2">

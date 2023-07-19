@@ -42,6 +42,13 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <span class="badge bg-secondary">
                         <?php echo $item['username'] ?>
                     </span>
+                    <?php if ($item['created_at']) {
+                        ?>
+                        <span class="badge bg-secondary date">
+                            <?php echo $item['created_at']; ?>
+                        </span>
+                        <?php
+                    } ?>
                 </div>
 
                 <?php echo $item['title'] ?>
