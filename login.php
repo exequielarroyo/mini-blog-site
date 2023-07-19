@@ -1,6 +1,5 @@
 <?php include "components/header.php";
 
-session_start();
 // Check if the user is already logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // Redirect to the authenticated page
@@ -12,20 +11,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // TODO: Validate the username and password against your user database
+    $result = mysqli_query($connection, "SELECT * FROM users WHERE email='$email' AND password='$password';");
 
-    // For the sake of demonstration, let's assume the login is successful
-    if ($email === 'zekielarroyo@gmail.com' && $password === 'admin123') {
+    if (mysqli_num_rows($result)) {
         // Store the login state in the session
+        $user = mysqli_fetch_array($result);
         $_SESSION['loggedin'] = true;
-        $_SESSION['email'] = $email;
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['users_id'] = $user['id'];
 
-        // Redirect to the authenticated page
         header('Location: index.php');
         exit;
     } else {
         // Invalid username or password
-        echo 'Invalid username or password.';
+        echo 'Invalid email or password.';
     }
 }
 ?>

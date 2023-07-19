@@ -1,8 +1,6 @@
 <?php
 include "components/header.php";
 
-session_start();
-
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     $email = "zekielarroyo@gmail.com";
     $password = "admin123";
@@ -13,7 +11,6 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         $_SESSION['loggedin'] = true;
         $_SESSION['email'] = $email;
 
-        echo "Logged in";
     } else {
         header("Location: index.php");
         exit();
@@ -26,17 +23,26 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 $users_id = mysqli_fetch_all($result, MYSQLI_ASSOC)[0]['id'];
 $result = mysqli_query($connection, "SELECT * FROM posts WHERE users_id = '$users_id';");
 $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
 
-foreach ($posts as $item): ?>
-    <div>
-        <?php echo $item['title'] ?>
-        <div class="text-secondary mt-2">
-            <?php echo $item['content'] ?>
-        </div>
+<div class="container my-4 ">
+    <div class="card p-2 w-100 mb-3">
+        <a href="create-post.php" class="btn btn-link">Create new post.</a>
     </div>
-<?php endforeach; ?>
 
+    <div class="d-flex flex-column gap-2 ">
 
-<a href="index.php">Logout</a>
+        <?php
+        foreach ($posts as $item): ?>
+            <div class="card p-2 w-100 ">
+                <?php echo $item['title'] ?>
+                <div class="text-secondary mt-2">
+                    <?php echo $item['content'] ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
+</div>
 
 <?php include 'components/footer.php' ?>

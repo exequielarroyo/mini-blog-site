@@ -1,6 +1,10 @@
 <?php include "config/database.php";
 
-
+session_start();
+$username;
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    $username = $_SESSION['username'];
+}
 ?>
 
 
@@ -22,10 +26,12 @@
         <h1 class="text-light px-4 py-2">MiniBlog</h1>
 
         <div class="d-flex">
-            <p class="text-light">Hi !</p>
-            <a href="index.php" class="btn btn-outline-primary text-light ">Home</a>
-            <form action="logout.php" method="post">
-                <button type="submit" class="btn btn-outline-primary text-light">Logout</button>
-            </form>
+            <?php if (!empty($username)) {
+                echo "<p class='text-light'>Hi $username!</p>";
+                echo "<a href='index.php' class='btn btn-outline-primary text-light '>Home</a>";
+                echo "<form action='logout.php' method='post'>
+                <button type='submit' class='btn btn-outline-primary text-light'>Logout</button>
+            </form>";
+            } ?>
         </div>
     </div>
