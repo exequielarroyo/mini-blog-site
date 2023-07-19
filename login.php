@@ -27,30 +27,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<div class="d-flex flex-column">
+    <h1 class="text-center ">Login</h1>
 
-<div class="d-flex justify-content-center align-content-center">
+    <div class="d-flex justify-content-center align-content-center">
 
-    <div class="card p-2 w-50 my-4">
+        <div class="card p-3 w-50 my-4">
 
-        <h2>Login</h2>
-        <form action="" method="POST">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-            </div>
+            <form action="" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+                <button type="submit" class="btn btn-primary">LOGIN</button>
+                <a href="registration.php" class="btn btn-link">REGISTRATION</a>
+            </form>
 
-        <a href="registration.php">registration</a>
-        <p>Currently logged out.</p>
+            <p>Currently logged out.</p>
 
+        </div>
     </div>
-
 </div>
 
 <?php include 'components/footer.php' ?>

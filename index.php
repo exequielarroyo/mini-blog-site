@@ -8,20 +8,7 @@ if (isset($_GET['delete_id'])) {
 }
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    $users_id = $users_id['loggedin'];
-    $result = mysqli_query($connection, "SELECT * FROM users WHERE id='$users_id';");
-
-    if (mysqli_num_rows($result)) {
-        // Store the login state in the session
-        $_SESSION['loggedin'] = true;
-        $_SESSION['email'] = $email;
-
-    } else {
-        header("Location: index.php");
-        exit();
-    }
-
-    $users_id = mysqli_fetch_all($result, MYSQLI_ASSOC)[0]['id'];
+    $users_id = $_SESSION['users_id'];
     $result = mysqli_query($connection, "SELECT * FROM posts WHERE users_id = '$users_id' ORDER BY id DESC;");
     $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } else {
@@ -32,15 +19,21 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 ?>
 
 <div class="container my-4 ">
-    <?php
-    if (isset($_SESSION['loggedin'])) {
-        ?>
-        <div class="card p-2 w-100 mb-3">
-            <a href="create-post.php" class="btn btn-link">Create new post.</a>
-        </div>
+
+    <div class="card p-2 w-100 mb-3">
         <?php
-    }
-    ?>
+        if (isset($_SESSION['loggedin'])) {
+            ?>
+            <a href="create-post.php" class="btn btn-link">Create new post.</a>
+            <?php
+        } else {
+            ?>
+            <p><a href="register.php">Sign up</a> to create a post.</p>
+            <?php
+        }
+        ?>
+    </div>
+
 
     <div class="d-flex flex-column gap-2 ">
 
@@ -53,7 +46,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                     <?php echo $item['content'] ?>
                 </div>
                 <?php
-                
+
                 if (isset($_SESSION['loggedin'])) {
                     ?>
                     <div class="d-flex justify-content-end  gap-2">
