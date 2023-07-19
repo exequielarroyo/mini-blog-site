@@ -9,6 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
     $confirm_password = $_POST["confirm_password"];
 
+    $result = mysqli_query($connection, "SELECT * FROM users WHERE email='$email';");
+    $users = mysqli_fetch_array($result);
+    if (count($users) !== 0) {
+        array_push($errors, "Email is already registered.");
+    }
+
 
     if ($password !== $confirm_password) {
         array_push($errors, "Password did not match.");
