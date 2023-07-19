@@ -10,8 +10,9 @@ if (!isset($_SESSION['loggedin'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
+    $posts_id = $_GET['id'];
 
-    $result = mysqli_query($connection, "UPDATE posts SET title='$title', content='$content';");
+    $result = mysqli_query($connection, "UPDATE posts SET title='$title', content='$content' WHERE id='$posts_id';");
 
     header('Location: index.php');
     exit;
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="d-flex justify-content-center align-content-center">
 
-    <div class="card p-2 w-50 my-4">
+    <div class="card p-2 w-75 my-4">
 
         <h2>Update a Post</h2>
         <form action="" method="POST">
@@ -39,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     value="<?php echo $post['title'] ?>">
             </div>
             <div class="mb-3">
-                <textarea class="form-control" name="content"
+                <textarea style="height: 300px" class="form-control" name="content"
                     placeholder="Input your content here."><?php echo $post['content'] ?></textarea>
             </div>
 

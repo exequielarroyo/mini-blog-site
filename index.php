@@ -9,8 +9,10 @@ if (isset($_GET['delete_id']) && $_SESSION['loggedin']) {
 }
 
 
-$result = mysqli_query($connection, "SELECT * FROM posts ORDER BY id DESC;");
+$result = mysqli_query($connection, "SELECT p.*, u.username FROM posts p JOIN users u ON p.users_id=u.id ORDER BY id DESC;");
 $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
 
 ?>
 
@@ -35,17 +37,22 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         <?php
         foreach ($posts as $item): ?>
-            <div class="card p-2 w-100 ">
+            <div class="card p-2 w-100">
+                <div>
+                    <span class="badge bg-secondary">
+                        <?php echo $item['username'] ?>
+                    </span>
+                </div>
 
                 <?php echo $item['title'] ?>
                 <div class="text-secondary mt-2">
-                    <?php echo $item['content'] ?>
+                    <textarea disabled class="form-control w-100"><?php echo $item['content'] ?></textarea>
                 </div>
                 <?php
 
                 if (isset($_SESSION['loggedin']) && $_SESSION['users_id'] === $item['users_id']) {
                     ?>
-                    <div class="d-flex justify-content-end  gap-2">
+                    <div class="d-flex justify-content-end mt-2 gap-2">
                         <a href="index.php?delete_id=<?php echo $item['id'] ?>" class="btn btn-danger ">Delete</a>
                         <a href="edit-post.php?id=<?php echo $item['id'] ?>" class="btn btn-success ">Edit</a>
                     </div>
