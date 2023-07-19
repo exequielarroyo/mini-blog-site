@@ -1,4 +1,4 @@
-<?php include "components/header.php"; 
+<?php include "components/header.php";
 
 session_start();
 // Check if the user is already logged in
@@ -32,19 +32,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="d-flex justify-content-center align-content-center">
 
-    <div class="card p-2 w-50 ">
+    <div class="card p-2 w-50 my-4">
 
         <h2>Login</h2>
         <form action="" method="POST">
-            <input type="email" name="email" placeholder="Enter Email">
-            <input type="password" name="password" placeholder="Enter Password">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="example@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
-        <a href="registration.php">registration</a>
 
+        <a href="registration.php">registration</a>
         <p>Currently logged out.</p>
 
     </div>
+
 </div>
 
 <?php include 'components/footer.php' ?>
