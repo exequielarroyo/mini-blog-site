@@ -45,12 +45,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Username"
-                        required value="<?php echo $username ?>">
+                        required value="<?php if (!empty($username)) {
+                            echo $username;
+                        } ?>">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email Adress</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com"
-                        required value="<?php echo $email ?>">
+                        required value="<?php if (!empty($email)) {
+                            echo $email;
+                        } ?>">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>

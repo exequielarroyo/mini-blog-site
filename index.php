@@ -7,14 +7,9 @@ if (isset($_GET['delete_id'])) {
     mysqli_query($connection, "DELETE FROM posts WHERE id='$posts_id';");
 }
 
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    $users_id = $_SESSION['users_id'];
-    $result = mysqli_query($connection, "SELECT * FROM posts WHERE users_id = '$users_id' ORDER BY id DESC;");
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-} else {
-    $result = mysqli_query($connection, "SELECT * FROM posts ORDER BY id DESC;");
-    $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
-}
+
+$result = mysqli_query($connection, "SELECT * FROM posts ORDER BY id DESC;");
+$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 ?>
 
@@ -28,7 +23,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             <?php
         } else {
             ?>
-            <p><a href="register.php">Sign up</a> to create a post.</p>
+            <p><a href="registration.php">Sign up</a> to create a post.</p>
             <?php
         }
         ?>
@@ -47,7 +42,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 </div>
                 <?php
 
-                if (isset($_SESSION['loggedin'])) {
+                if (isset($_SESSION['loggedin']) && $_SESSION['users_id'] === $item['users_id']) {
                     ?>
                     <div class="d-flex justify-content-end  gap-2">
                         <a href="index.php?delete_id=<?php echo $item['id'] ?>" class="btn btn-danger ">Delete</a>
