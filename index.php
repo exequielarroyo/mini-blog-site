@@ -47,7 +47,7 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </div>
                 <div class="d-flex justify-content-end  gap-2">
                     <a href="index.php?delete_id=<?php echo $item['id'] ?>" class="btn btn-danger ">Delete</a>
-                    <a href="" class="btn btn-success ">Edit</a>
+                    <a href="edit-post.php?id=<?php echo $item['id'] ?>" class="btn btn-success ">Edit</a>
                 </div>
             </div>
         <?php endforeach; ?>
