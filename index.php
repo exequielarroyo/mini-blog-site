@@ -1,50 +1,42 @@
-<?php include "components/header.php"; 
+<?php
+include "components/header.php";
 
 session_start();
-// Check if the user is already logged in
+
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Redirect to the authenticated page
-    header('Location: home.php');
-    exit;
-}
+    $email = "zekielarroyo@gmail.com";
+    $password = "admin123";
+    $result = mysqli_query($connection, "SELECT * FROM users WHERE email='$email' AND password='$password';");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // TODO: Validate the username and password against your user database
-
-    // For the sake of demonstration, let's assume the login is successful
-    if ($email === 'zekielarroyo@gmail.com' && $password === 'admin123') {
+    if (mysqli_num_rows($result)) {
         // Store the login state in the session
         $_SESSION['loggedin'] = true;
         $_SESSION['email'] = $email;
 
-        // Redirect to the authenticated page
-        header('Location: home.php');
-        exit;
+        echo "Logged in";
     } else {
-        // Invalid username or password
-        echo 'Invalid username or password.';
+        header("Location: index.php");
+        exit();
     }
+} else {
+    header("Location: login.php");
+    exit();
 }
-?>
 
-<div class="d-flex justify-content-center align-content-center">
+$users_id = mysqli_fetch_all($result, MYSQLI_ASSOC)[0]['id'];
+$result = mysqli_query($connection, "SELECT * FROM posts WHERE users_id = '$users_id';");
+$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    <div class="card p-2 w-50 ">
-
-        <h2>Login</h2>
-        <form action="" method="POST">
-            <input type="email" name="email" placeholder="Enter Email">
-            <input type="password" name="password" placeholder="Enter Password">
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        <a href="registration.php">registration</a>
-
-        <p>Currently logged out.</p>
-
+foreach ($posts as $item): ?>
+    <div>
+        <?php echo $item['title'] ?>
+        <div class="text-secondary mt-2">
+            <?php echo $item['content'] ?>
+        </div>
     </div>
-</div>
+<?php endforeach; ?>
+
+
+<a href="index.php">Logout</a>
 
 <?php include 'components/footer.php' ?>
