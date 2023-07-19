@@ -1,6 +1,12 @@
 <?php
 include "components/header.php";
 
+// // Check if the user is already logged in
+// if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+//     header('Location: index.php');
+//     exit;
+// }
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
@@ -26,7 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <textarea class="form-control" name="content" placeholder="Input your content here."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Post</button>
+            <div class="d-flex justify-content-end gap-2">
+                <a href="index.php" class="btn btn-secondary ">Cancel</a>
+                <button type="submit" class="btn btn-primary">Post</button>
+            </div>
         </form>
 
     </div>

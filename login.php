@@ -2,7 +2,6 @@
 
 // Check if the user is already logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    // Redirect to the authenticated page
     header('Location: index.php');
     exit;
 }

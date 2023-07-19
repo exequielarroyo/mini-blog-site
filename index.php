@@ -1,6 +1,12 @@
 <?php
 include "components/header.php";
 
+if (isset($_GET['delete_id'])) {
+    $posts_id = $_GET['delete_id'];
+
+    mysqli_query($connection, "DELETE FROM posts WHERE id='$posts_id';");
+}
+
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     $email = "zekielarroyo@gmail.com";
     $password = "admin123";
@@ -38,6 +44,10 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <?php echo $item['title'] ?>
                 <div class="text-secondary mt-2">
                     <?php echo $item['content'] ?>
+                </div>
+                <div class="d-flex justify-content-end  gap-2">
+                    <a href="index.php?delete_id=<?php echo $item['id'] ?>" class="btn btn-danger ">Delete</a>
+                    <a href="" class="btn btn-success ">Edit</a>
                 </div>
             </div>
         <?php endforeach; ?>
