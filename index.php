@@ -73,5 +73,25 @@ $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     </div>
 </div>
+<script>
+    function formatDate(dateString) {
+        const dateObj = new Date(dateString);
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        };
+        return dateObj.toLocaleDateString('en-US', options);
+    }
 
+    const dateElements = document.querySelectorAll('.date');
+
+    dateElements.forEach(element => {
+        const originalDate = element.textContent.trim();
+        const formattedDate = formatDate(originalDate);
+        element.textContent = formattedDate;
+    });
+</script>
 <?php include 'components/footer.php' ?>
