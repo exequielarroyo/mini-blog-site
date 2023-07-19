@@ -1,4 +1,9 @@
-<?php include "config/database.php"; ?>
+<?php include "config/database.php";
+
+
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,3 +17,15 @@
 </head>
 
 <body>
+
+    <div class="bg-primary d-flex justify-content-between">
+        <h1 class="text-light px-4 py-2">MiniBlog</h1>
+
+        <div class="d-flex">
+            <p class="text-light">Hi !</p>
+            <a href="index.php" class="btn btn-outline-primary text-light ">Home</a>
+            <form action="logout.php" method="post">
+                <button type="submit" class="btn btn-outline-primary text-light">Logout</button>
+            </form>
+        </div>
+    </div>
