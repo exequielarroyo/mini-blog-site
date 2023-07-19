@@ -32,6 +32,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 echo "<form action='logout.php' method='post'>
                 <button type='submit' class='btn btn-outline-primary text-light'>Logout</button>
             </form>";
+            } else {
+                echo "<a href='index.php' class='btn btn-outline-primary text-light '>Home</a>";
+                echo "<a href='login.php' class='btn btn-outline-primary text-light '>Login</a>";
             } ?>
         </div>
     </div>
