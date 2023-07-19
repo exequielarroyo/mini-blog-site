@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="alert alert-danger " role="alert">
                     <?php
                     foreach ($errors as $error) {
-                        echo "<p>$error</p>";
+                        echo "<p class='m-0'>$error</p>";
                     }
                     ?>
                 </div>
