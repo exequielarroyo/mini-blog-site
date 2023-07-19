@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $result = mysqli_query($connection, "SELECT * FROM users WHERE email='$email';");
     $users = mysqli_fetch_array($result);
-    if (count($users) !== 0) {
+    if ($users) {
         array_push($errors, "Email is already registered.");
     }
 
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="alert alert-danger " role="alert">
                     <?php
                     foreach ($errors as $error) {
-                        echo $error;
+                        echo "<p>$error</p>";
                     }
                     ?>
                 </div>
