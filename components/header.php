@@ -25,9 +25,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <div class="bg-primary d-flex justify-content-between">
         <h1 class="text-light px-4 py-2">MiniBlog</h1>
 
-        <div class="d-flex">
+        <div class="d-flex align-items-center ">
             <?php if (!empty($username)) {
-                echo "<p class='text-light'>Hi $username!</p>";
+                echo "<a class='btn btn-outline-primary text-light fw-bold'>Hi $username!</a>";
                 echo "<a href='index.php' class='btn btn-outline-primary text-light '>Home</a>";
                 echo "<form action='logout.php' method='post'>
                 <button type='submit' class='btn btn-outline-primary text-light'>Logout</button>

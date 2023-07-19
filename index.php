@@ -1,10 +1,11 @@
 <?php
 include "components/header.php";
 
-if (isset($_GET['delete_id'])) {
+if (isset($_GET['delete_id']) && $_SESSION['loggedin']) {
     $posts_id = $_GET['delete_id'];
+    $users_id = $_SESSION['users_id'];
 
-    mysqli_query($connection, "DELETE FROM posts WHERE id='$posts_id';");
+    mysqli_query($connection, "DELETE FROM posts WHERE id='$posts_id' AND users_id='$users_id';");
 }
 
 

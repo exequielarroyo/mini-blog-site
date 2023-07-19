@@ -6,6 +6,7 @@ if (!isset($_SESSION['loggedin'])) {
     exit;
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
@@ -16,8 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 } else {
     $posts_id = $_GET['id'];
-    $result = mysqli_query($connection, "SELECT * FROM posts WHERE id='$posts_id';");
+    $users_id = $_SESSION['users_id'];
+    $result = mysqli_query($connection, "SELECT * FROM posts WHERE id='$posts_id' AND users_id='$users_id';");
     $post = mysqli_fetch_array($result);
+
+    if (!$post) {
+        header('Location: index.php');
+        exit;
+    }
 }
 ?>
 
