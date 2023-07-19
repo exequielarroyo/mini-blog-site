@@ -27,7 +27,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 }
 
 $users_id = mysqli_fetch_all($result, MYSQLI_ASSOC)[0]['id'];
-$result = mysqli_query($connection, "SELECT * FROM posts WHERE users_id = '$users_id';");
+$result = mysqli_query($connection, "SELECT * FROM posts WHERE users_id = '$users_id' ORDER BY id DESC;");
 $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
